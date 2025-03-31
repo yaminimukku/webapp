@@ -1,54 +1,36 @@
 pipeline {
     agent any
-    tools {
-        maven '3.9.1'
+
+    parameters {
+        booleanparm 
+
     }
-    environment {     
-        DOCKERHUB_CREDENTIALS = credentials('docker-hub')
+
+    environment {
+
     }
+
+
     stages {
-        stage ('environment test') {
+        stage("checkout") {
             steps {
-                sh 'docker version'
-                sh 'mvn --version'
-                sh 'java --version'
+                echo "git checkout"
             }
         }
-        stage ("build & SonarQube analysis") {
+        stage("build") {
             steps {
-                withSonarQubeEnv('sonarqube') {
-                    sh 'mvn clean package sonar:sonar'
-                }
+                echo "build successful"
             }
         }
-        // stage("Quality Gate") {
-        //     steps {
-        //         timeout(time: 2, unit: 'MINUTES') {
-        //             waitForQualityGate abortPipeline: true
-        //         }
-        //     }
-        // }
-        stage ('docker login') {
+        stage("test") {
             steps {
-                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                echo "test successful"
             }
         }
-        stage ('building & tagging docker image') {
+        stage("deploy") {
             steps {
-                sh 'docker build -t srinu7150/webapp:$BUILD_NUMBER .'
-                sh 'docker tag srinu7150/webapp:$BUILD_NUMBER srinu7150/webapp:latest'
+                echo "deploy successful"
             }
-        }
-        stage ('pushing to docker hub') {
-            steps {
-                sh 'docker push srinu7150/webapp:$BUILD_NUMBER'
-                sh 'docker push srinu7150/webapp:latest'
-            }
-        }
-    }
-    post{
-        always {  
-            sh 'docker logout'
         }
     }
 }
