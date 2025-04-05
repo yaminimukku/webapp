@@ -2,20 +2,25 @@ pipeline {
     agent any
     
     stages {
-        steps (code) {
-            echo "coding completed"
-
+        stage ("code") {
+            steps {
+                echo "coding completed"
+            }
         }
-        steps (build) {
+        stage ("build") {
+            steps {
             echo "building completed"
-
+            }
         }
-        steps (test) {
-             echo "testing completed"
-
+        stage ("test") {
+            steps {
+             echo "testing completed"  
+            }     
         }
-        steps (depoly) {
-            echo "deploying code"
+        stage ("depoly") {
+            steps {
+            echo "deploying code"  
+            }
         }
     }
 }
