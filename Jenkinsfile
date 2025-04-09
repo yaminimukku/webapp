@@ -5,11 +5,11 @@ pipeline {
         booleanParam (name: 'sonarScan', defaultValue: true, description: 'To run scan in pipeline')
 
     }
-    enironment {
+    environment {
         JAVA_HOME = "/usr/lib/jvm/java-11-openjdk-amd64"
         PATH = "$PATH:$JAVA_HOME/bin"
         MVN_SETTINGS = "pipeline/settings.xml"
-        SONAR_TOKEN = credentials('webapp-sonar')
+        SONAR_TOKEN = credentials('sonar-token')
         GIT_CREDS = credentials('github-credentials')
         VERSION = ""
     }
@@ -42,8 +42,14 @@ pipeline {
                     params.sonarScan == true
                 }
             }
+        steps {
+            withSonarQubeEnv('sonarqube') {
+            sh "mvn -s ${MVN_SETTINGS} sonar:sonar \
+             -Dsonar.projectKey=webapp \
+             -Dsonar.host.url=http://192.168.1.6:9000 \
+             -Dsonar.login=${SONAR_TOKEN}"
+            }
           }
-          
         }
-    
+    }
 }
