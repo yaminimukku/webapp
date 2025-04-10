@@ -10,7 +10,7 @@ pipeline {
         PATH = "$PATH:$JAVA_HOME/bin"
         MVN_SETTINGS = "pipeline/settings.xml"
         SONAR_TOKEN = credentials('sonar-token')
-        GIT_CREDS = credentials('github-credentials')
+        GIT_CREDS = credentials('git-cred')
         VERSION = ""
     }
     
