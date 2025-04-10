@@ -34,8 +34,8 @@ pipeline {
         //     steps {
         //     sh "mvn -s ${MVN_SETTINGS} test"
         //     echo "test completed"  
-            }     
-        }
+        //     }     
+        // }
         stage ("scan") {
             when {
                 expression {
