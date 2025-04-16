@@ -49,7 +49,7 @@ pipeline {
             steps {
                 withSonarQubeEnv('sonarqube') {
                     sh """mvn -s ${MVN_SETTINGS} sonar:sonar \
-                        -Dsonar.projectKey=webapp \
+                        -Dsonar.projectKey=webapp-demo \
                         -Dsonar.host.url=http://localhost:9000 \
                         -Dsonar.login=${SONAR_TOKEN}"""
                 }
