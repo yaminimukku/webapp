@@ -30,12 +30,12 @@ pipeline {
             echo "build success"
             }
         }
-        // stage ("test") {
-        //     steps {
-        //     sh "mvn -s ${MVN_SETTINGS} test"
-        //     echo "test completed"  
-        //     }     
-        // }
+        stage ("test") {
+            steps {
+            sh "mvn -s ${MVN_SETTINGS} test"
+            echo "test completed"  
+            }     
+        }
         stage ("scan") {
             when {
                 expression {
@@ -46,7 +46,7 @@ pipeline {
             withSonarQubeEnv('sonarqube') {
             sh "mvn -s ${MVN_SETTINGS} sonar:sonar \
              -Dsonar.projectKey=webapp \
-             -Dsonar.host.url=http://192.168.1.6:9000 \
+             -Dsonar.host.url=http://localhost:9000 \
              -Dsonar.login=${SONAR_TOKEN}"
             }
           }
