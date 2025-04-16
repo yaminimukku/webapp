@@ -1,35 +1,25 @@
 pipeline {
     agent any
 
-    parameters {
-        booleanparm 
-
-    }
-
-    environment {
-
-    }
-
-
     stages {
-        stage("checkout") {
+        stage ('checkout') {
+           steps {
+                echo "checkoout successful"
+           }
+        }
+        stage ('build') {
             steps {
-                echo "git checkout"
+                echo "build success"
             }
         }
-        stage("build") {
+        stage ('test') {
             steps {
-                echo "build successful"
+                echo "test completed"
             }
         }
-        stage("test") {
+        stage ('deploy') {
             steps {
-                echo "test successful"
-            }
-        }
-        stage("deploy") {
-            steps {
-                echo "deploy successful"
+                echo "deploy success"
             }
         }
     }
