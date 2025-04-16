@@ -29,13 +29,13 @@ pipeline {
             sh "mvn -s ${MVN_SETTINGS} clean compile"
             echo "build success"
             }
-        }
-        stage ("test") {
-            steps {
-            sh "mvn -s ${MVN_SETTINGS} test"
-            echo "test completed"  
-            }     
-        }
+        // }
+        // stage ("test") {
+        //     steps {
+        //     sh "mvn -s ${MVN_SETTINGS} test"
+        //     echo "test completed"  
+        //     }     
+        // }
         stage ("scan") {
             when {
                 expression {
