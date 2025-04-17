@@ -1,5 +1,7 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.devops.demo</groupId>
@@ -9,6 +11,19 @@
 
   <name>webapp</name>
   <url>http://maven.apache.org</url>
+
+  <distributionManagement>
+    <repository>
+      <id>central</id> <!-- This matches the <server> id in your settings.xml -->
+      <name>Artifactory Release Repo</name>
+      <url>http://localhost:8081/artifactory/my-maven-virtual-releases</url>
+    </repository>
+    <snapshotRepository>
+      <id>snapshots</id> <!-- This also matches your settings.xml -->
+      <name>Artifactory Snapshot Repo</name>
+      <url>http://localhost:8081/artifactory/my-maven-virtual-snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
 
   <dependencies>
     <dependency>
